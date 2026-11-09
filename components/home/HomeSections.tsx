@@ -67,17 +67,18 @@ export function CategorySection({ categories }: { categories: Category[] }) {
           View the full shop
         </Link>
       </div>
-      <div className="mt-10 grid grid-cols-2 gap-x-3 gap-y-8 sm:gap-x-5 sm:gap-y-10 lg:grid-cols-5">
+      <div className="mt-10 grid grid-cols-2 items-stretch gap-3 sm:gap-5 lg:grid-cols-5">
         {categories.map((category, index) => (
           <motion.div
             key={category.id}
+            className="h-full"
             initial={reduce ? false : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45, delay: reduce ? 0 : Math.min(index * 0.04, 0.2) }}
           >
-            <Link href={`/shop/${category.slug}`} className="group block">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.4rem] bg-sand">
+            <Link href={`/shop/${category.slug}`} className="group flex h-full flex-col rounded-[1.4rem] bg-transparent p-2 sm:p-3">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.1rem] bg-sand">
                 <Image
                   src={category.image}
                   alt=""
@@ -86,11 +87,14 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                   className="object-cover transition duration-700 group-hover:scale-[1.04]"
                 />
               </div>
-              <h3 className="mt-3 font-serif text-xl leading-none sm:mt-4 sm:text-2xl">{category.name}</h3>
-              <p className="mt-2 text-xs leading-5 text-muted sm:text-sm sm:leading-6">{category.description}</p>
-              <span className="mt-3 inline-block text-sm underline decoration-olive underline-offset-4">
-                Explore
-              </span>
+              <div className="flex flex-1 flex-col px-1 pt-3 pb-1">
+                <h3 className="line-clamp-2 min-h-[2.6rem] font-serif text-lg leading-tight sm:min-h-[3.4rem] sm:text-2xl">{category.name}</h3>
+                <p className="mt-2 line-clamp-3 min-h-[3.75rem] text-xs leading-5 text-muted sm:min-h-[4.5rem] sm:text-sm sm:leading-6">{category.description}</p>
+                <span className="mt-auto inline-flex w-fit items-center gap-2 rounded-full border border-forest/20 px-3.5 py-2 text-[11px] tracking-[0.16em] text-forest uppercase transition duration-300 group-hover:border-forest group-hover:bg-forest group-hover:text-cream">
+                  Explore
+                  <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>→</span>
+                </span>
+              </div>
             </Link>
           </motion.div>
         ))}
