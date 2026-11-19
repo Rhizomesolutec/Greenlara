@@ -8,9 +8,9 @@ export function Footer({ categories }: { categories: Category[] }) {
     <footer className="mt-auto bg-forest text-cream">
       <div className="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <Logo href="/" tone="light" />
+          <Logo href="/" tone="light" size="lg" />
           <p className="mt-5 max-w-sm text-sm leading-7 text-cream/75">
-            Green Lara is a grains shop for rice, millets, wheat, pulses, seeds, and everyday staples.
+            Green Lara is a dedicated spices and pulses shop for whole spices, ground masalas, dals, lentils, and beans.
             Contact details below are placeholders until the real ones are added.
           </p>
         </div>

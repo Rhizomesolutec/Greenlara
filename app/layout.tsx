@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s · Green Lara",
   },
   description:
-    "Green Lara is a premium grains shop for rice, millets, wheat, pulses, seeds, and everyday staples.",
+    "Green Lara is a premium spices and pulses shop for whole spices, ground masalas, lentils, dals, and beans.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

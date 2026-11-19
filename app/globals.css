@@ -103,6 +103,25 @@ body {
   box-shadow: 0 18px 50px rgba(52, 58, 37, 0.08);
 }
 
+@keyframes announcement-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-announcement {
+  display: flex;
+  width: max-content;
+  animation: announcement-marquee 26s linear infinite;
+}
+
+.animate-announcement:hover {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

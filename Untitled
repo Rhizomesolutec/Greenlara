@@ -1,0 +1,7 @@
+AUTH_SECRET=replace-with-a-long-random-string
+ADMIN_EMAIL=admin@greenlara.example
+ADMIN_PASSWORD=replace-with-a-private-password
+# Optional. Leave unset until a real gateway is connected.
+# PAYMENT_GATEWAY_KEY=
+# PAYMENT_GATEWAY_SECRET=
+MONGODB_URI=mongodb+srv://USER:PASSWORD@cluster.example.mongodb.net/Green-lara

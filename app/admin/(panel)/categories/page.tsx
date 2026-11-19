@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import type { Category } from "@/lib/types";
 
-const empty = { id: "", name: "", slug: "", description: "", image: "/images/rice-unsplash.jpg" };
+const empty = { id: "", name: "", slug: "", description: "", image: "/images/whole-spices.jpg" };
 
 export default function Page() {
   const [categories, setCategories] = useState<Category[]>([]);

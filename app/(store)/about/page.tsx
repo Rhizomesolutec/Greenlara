@@ -4,15 +4,15 @@ import { Prose } from "@/components/site/Prose";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "The story of Green Lara, a grains shop for everyday staples.",
+  description: "The story of Green Lara, a spices and pulses shop for everyday kitchens.",
 };
 
 export default function Page() {
   return (
     <Prose
       eyebrow="About Us"
-      title="A shop for the grains people cook with."
-      lede="Green Lara is being prepared as a place to buy rice, millets, wheat, pulses, seeds, and the staples that sit behind a good meal."
+      title="A shop for the spices and pulses people cook with."
+      lede="Green Lara is being prepared as a place to buy whole spices, freshly ground masalas, dals, lentils, and beans that sit behind a good meal."
     >
       <p>
         This page is ready for the real story of the brand. It does not invent a founding year, a founder, or a farm. Those belong here when you choose to tell them.

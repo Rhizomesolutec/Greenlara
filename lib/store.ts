@@ -1,11 +1,47 @@
 import fs from "fs";
 import path from "path";
 import { io } from "next/cache";
-import { createSeedStore } from "./catalogue";
+import { CATALOGUE_VERSION, createSeedStore } from "./catalogue";
 import { connectDB, mongoConfigured, StoreModel } from "./db";
 import type { StoreData } from "./types";
 
 const filePath = path.join(process.cwd(), "data", "store.json");
+const publicDir = path.join(process.cwd(), "public");
+
+function localImageMissing(imageUrl: string | undefined): boolean {
+  if (!imageUrl || !imageUrl.startsWith("/images/")) return false;
+  const relative = imageUrl.replace(/^\/+/, "");
+  return !fs.existsSync(path.join(publicDir, relative));
+}
+
+function hasBrokenLocalImages(store: StoreData): boolean {
+  for (const category of store.categories) {
+    if (localImageMissing(category.image)) return true;
+  }
+  for (const product of store.products) {
+    if (!product.images?.length) return true;
+    if (product.images.some((img) => localImageMissing(img))) return true;
+  }
+  return false;
+}
+
+function migrateIfNeeded(store: StoreData): { store: StoreData; migrated: boolean } {
+  if ((store.version ?? 1) >= CATALOGUE_VERSION && !hasBrokenLocalImages(store)) {
+    return { store, migrated: false };
+  }
+  const seed = createSeedStore();
+  return {
+    migrated: true,
+    store: {
+      version: CATALOGUE_VERSION,
+      categories: seed.categories,
+      products: seed.products,
+      orders: store.orders ?? [],
+      enquiries: store.enquiries ?? [],
+      subscribers: store.subscribers ?? [],
+    },
+  };
+}
 
 function normalize(parsed: Partial<StoreData>): StoreData {
   if (!Array.isArray(parsed.products) || !Array.isArray(parsed.categories)) {
@@ -30,7 +66,10 @@ function readFileStore(): StoreData {
     return seed;
   }
   try {
-    return normalize(JSON.parse(fs.readFileSync(filePath, "utf8")) as StoreData);
+    const parsed = normalize(JSON.parse(fs.readFileSync(filePath, "utf8")) as StoreData);
+    const { store, migrated } = migrateIfNeeded(parsed);
+    if (migrated) writeFileStore(store);
+    return store;
   } catch {
     return createSeedStore();
   }
@@ -56,7 +95,14 @@ function fromDocument(doc: {
 async function readMongoStore(): Promise<StoreData> {
   await connectDB();
   const existing = await StoreModel.findOne({ key: "main" }).lean();
-  if (existing) return fromDocument(existing);
+  if (existing) {
+    const parsed = fromDocument(existing);
+    const { store, migrated } = migrateIfNeeded(parsed);
+    if (migrated) {
+      await writeMongoStore(store);
+    }
+    return store;
+  }
   const seed = fs.existsSync(filePath) ? readFileStore() : createSeedStore();
   await StoreModel.create({ key: "main", ...seed });
   return seed;

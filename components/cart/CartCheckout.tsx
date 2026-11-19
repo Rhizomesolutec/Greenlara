@@ -82,7 +82,7 @@ export function CartView() {
       {items.length === 0 ? (
         <div className="mt-10 max-w-lg rounded-[1.6rem] bg-white p-8">
           <p className="font-serif text-3xl">The cart is empty.</p>
-          <p className="mt-3 text-sm leading-6 text-muted">Add a grain when you are ready. Sample prices are confirmed again at checkout.</p>
+          <p className="mt-3 text-sm leading-6 text-muted">Add a spice or pulse when you are ready. Sample prices are confirmed again at checkout.</p>
           <Link href="/shop" className="btn btn-dark mt-6">Explore Products</Link>
         </div>
       ) : (

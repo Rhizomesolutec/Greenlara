@@ -14,7 +14,7 @@ export type ShopFilters = {
 
 export const pageSize = 12;
 
-export const weightChoices = ["250g", "500g", "1kg", "5kg", "10kg", "25kg", "50kg"];
+export const weightChoices = ["100g", "250g", "500g", "1kg", "5kg", "10kg", "25kg", "50kg"];
 
 export function referenceWeight(product: Product) {
   return product.weights.find((weight) => weight.grams === 1000) ?? product.weights[0];

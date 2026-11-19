@@ -65,7 +65,7 @@ export function ShopExperience({
               value={filters.q}
               onChange={(event) => update({ q: event.target.value })}
               className="field"
-              placeholder="Rice, ragi, rajma"
+              placeholder="Cardamom, turmeric, toor dal, rajma"
             />
           </label>
           <label className="grid gap-1 text-sm">
@@ -177,10 +177,10 @@ export function ShopExperience({
           {result.items.length === 0 ? (
             <div className="rounded-[1.5rem] bg-white p-10 text-center">
               <p className="font-serif text-3xl">Nothing matches these filters.</p>
-              <p className="mt-3 text-sm text-muted">Try another grain, or clear the filters.</p>
+              <p className="mt-3 text-sm text-muted">Try another spice or pulse, or clear the filters.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 sm:gap-8 xl:grid-cols-3">
+            <div className="grid grid-cols-2 items-stretch gap-3 sm:gap-8 xl:grid-cols-3">
               {result.items.map((product) => (
                 <ProductCard
                   key={product.id}

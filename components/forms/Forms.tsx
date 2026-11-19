@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FadeIn } from "@/components/site/Motion";
 
 export function EnquiryForm({ type }: { type: "wholesale" | "contact" }) {
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
@@ -93,22 +94,24 @@ export function EnquiryForm({ type }: { type: "wholesale" | "contact" }) {
 export function BulkSection() {
   return (
     <section id="bulk" className="container-page py-16 md:py-24">
-      <div className="grid gap-10 rounded-[2rem] bg-white p-6 md:p-10 lg:grid-cols-2 lg:p-12">
-        <div>
-          <p className="text-xs tracking-[0.2em] text-muted uppercase">Wholesale</p>
-          <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">Looking for Grains in Bulk?</h2>
-          <p className="mt-5 text-base leading-7 text-muted">
-            Whether you&apos;re a retailer, wholesaler, restaurant, distributor, or business, Green Lara helps you find the right products and quantities.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#bulk-form" className="btn btn-dark">Request Bulk Pricing</a>
-            <a href="/contact" className="btn btn-line">Contact Our Team</a>
+      <FadeIn>
+        <div className="grid gap-10 rounded-[2rem] bg-white p-6 shadow-soft md:p-10 lg:grid-cols-2 lg:p-12">
+          <div>
+            <p className="text-xs tracking-[0.2em] text-muted uppercase">Wholesale</p>
+            <h2 className="mt-3 font-serif text-4xl leading-tight md:text-5xl">Looking for Spices &amp; Pulses in Bulk?</h2>
+            <p className="mt-5 text-base leading-7 text-muted">
+              Whether you&apos;re a retailer, wholesaler, restaurant, distributor, or business, Green Lara helps you find the right spices, pulses, and quantities.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#bulk-form" className="btn btn-dark hover:-translate-y-0.5">Request Bulk Pricing</a>
+              <a href="/contact" className="btn btn-line hover:-translate-y-0.5">Contact Our Team</a>
+            </div>
+          </div>
+          <div id="bulk-form">
+            <EnquiryForm type="wholesale" />
           </div>
         </div>
-        <div id="bulk-form">
-          <EnquiryForm type="wholesale" />
-        </div>
-      </div>
+      </FadeIn>
     </section>
   );
 }
@@ -136,22 +139,24 @@ export function Newsletter() {
 
   return (
     <section className="container-page pb-20">
-      <div className="rounded-[2rem] bg-peach px-6 py-14 text-center md:px-16">
-        <h2 className="font-serif text-4xl md:text-5xl">Stay Connected With Green Lara.</h2>
-        <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-muted">
-          Leave an email for news about the shop. This demo saves the address. It does not send a message.
-        </p>
-        {done ? (
-          <p className="mt-8 text-sm" role="status">You are on the list.</p>
-        ) : (
-          <form onSubmit={onSubmit} className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
-            <label className="sr-only" htmlFor="newsletter-email">Email</label>
-            <input id="newsletter-email" name="email" type="email" required placeholder="Email address" className="field" />
-            <button type="submit" className="btn btn-dark">Subscribe</button>
-          </form>
-        )}
-        {error ? <p className="mt-3 text-sm text-red-800">{error}</p> : null}
-      </div>
+      <FadeIn>
+        <div className="rounded-[2rem] bg-peach px-6 py-14 text-center md:px-16">
+          <h2 className="font-serif text-4xl md:text-5xl">Stay Connected With Green Lara.</h2>
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-6 text-muted">
+            Leave an email for news about our spices and pulses. This demo saves the address. It does not send a message.
+          </p>
+          {done ? (
+            <p className="mt-8 text-sm" role="status">You are on the list.</p>
+          ) : (
+            <form onSubmit={onSubmit} className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
+              <label className="sr-only" htmlFor="newsletter-email">Email</label>
+              <input id="newsletter-email" name="email" type="email" required placeholder="Email address" className="field" />
+              <button type="submit" className="btn btn-dark hover:-translate-y-0.5">Subscribe</button>
+            </form>
+          )}
+          {error ? <p className="mt-3 text-sm text-red-800">{error}</p> : null}
+        </div>
+      </FadeIn>
     </section>
   );
 }

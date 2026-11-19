@@ -29,7 +29,7 @@ function fromProduct(product?: Product): {
     categoryId: product?.categoryId ?? "",
     summary: product?.summary ?? "",
     description: product?.description ?? "",
-    images: product?.images?.length ? product.images : ["/images/rice-unsplash.jpg"],
+    images: product?.images?.length ? product.images : ["/images/whole-spices.jpg"],
     weights: product?.weights.map((weight) => ({
       label: weight.label,
       grams: String(weight.grams),
@@ -126,7 +126,7 @@ export function ProductForm({
           </div>
         ))}
         <div className="flex flex-wrap gap-2">
-          <input className="field max-w-sm" value={imageUrl} placeholder="/images/rice-unsplash.jpg" onChange={(event) => setImageUrl(event.target.value)} />
+          <input className="field max-w-sm" value={imageUrl} placeholder="/images/whole-spices.jpg" onChange={(event) => setImageUrl(event.target.value)} />
           <button type="button" className="btn btn-line" onClick={() => { if (imageUrl.trim()) { set("images", [...draft.images, imageUrl.trim()]); setImageUrl(""); } }}>Add path</button>
           <label className="btn btn-line cursor-pointer">
             Upload
